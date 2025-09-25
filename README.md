@@ -15,7 +15,7 @@ O Espaço Logos de Cidadania Consciente atua na região da Tijuca (Rio de Janeir
 
 1. **Coleta de Dados**  
    - Usa a **Instagram Graph API** para buscar todas as mídias do perfil da ONG.  
-   - Campos coletados (exemplo): `id`, `caption`, `media_type`, `timestamp`, `permalink`, `like_count`, `comments_count`.
+   - Campos coletados: `id`, `caption`, `media_type`, `timestamp`, `permalink`, `like_count`, `comments_count`.
 
 2. **Batch de Insights**  
    - Em lotes (até 50 IDs por requisição) busca `saved` e `shares` via endpoint `/insights?metric=saved,shares` para reduzir número de requisições e tempo.
