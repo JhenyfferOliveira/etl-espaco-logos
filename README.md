@@ -37,10 +37,14 @@ O Espaço Logos de Cidadania Consciente atua na região da Tijuca (Rio de Janeir
 
 ## Visualização de Dados com o Looker Studio 
 
-O dashboard foi desenvolvido pensando em uma usuária não técnica. O objetivo era responder perguntas que ajudassem a ONG a melhorar sua estratégia de conteúdo.
+O dashboard foi construído para responder duas perguntas principais:
+
+- O que engaja o público da ONG?
+- Quando vale a pena publicar para aumentar esse engajamento?
+
+Todas as visualizações foram escolhidas para responder uma dessas perguntas e transformar dados em recomendações acionáveis para uma usuária sem conhecimento técnico.
 
 ![Página 1](dashboard/Espaço_Logos_page-0001.jpg)
-![Página 1](dashboard/Espaço_Logos_page-0002.jpg)
 
 ## Página 1 – O que engaja nosso público?
 
@@ -51,6 +55,34 @@ A primeira página identifica quais conteúdos geram maior engajamento. As anál
 
 Além dos indicadores, cada seção apresenta um insight interpretando os resultados.
 
+### Cards
+
+Os cards apresentam uma visão executiva do cenário geral. Além de indicadores descritivos, destacam rapidamente os dois principais achados da análise:
+- o formato com maior engajamento médio
+- a principal oportunidade identificada na estratégia atual de conteúdo
+
+A ideia é permitir que a gestora compreenda o panorama do perfil em poucos segundos antes de aprofundar a análise.
+
+### Gráfico de dispersão
+
+O gráfico relaciona duas variáveis importantes:
+- quantidade de publicações por formato
+- engajamento médio obtido por publicação
+
+Os quadrantes ajudam a identificar oportunidades. Nesse caso, ficou evidente que imagens representam a maior parte do calendário editorial, mas possuem o menor engajamento médio, enquanto vídeos apresentam desempenho superior mesmo sendo publicados com pouca frequência. Essa visualização permite responder rapidamente se a estratégia atual de publicação está alinhada com o comportamento do público.
+
+### Evidências da análise
+
+As tabelas complementam o diagnóstico detalhando como cada formato performa em diferentes tipos de interação. Foram analisadas quatro métricas:
+- curtidas
+- comentários
+- salvamentos
+- compartilhamentos
+
+Nesse ponto, a análise utiliza médias por publicação, permitindo comparações mais justas entre formatos com volumes diferentes de postagens. Cada visualização é acompanhada por um insight interpretando os resultados e relacionando-os ao contexto da ONG.
+
+![Página 1](dashboard/Espaço_Logos_page-0002.jpg)
+
 ## Página 2 – Quando vale a pena publicar?
 
 A segunda página transforma os resultados em recomendações práticas. Ela apresenta:
@@ -59,7 +91,26 @@ A segunda página transforma os resultados em recomendações práticas. Ela apr
 - recomendações priorizadas
 - hipóteses para validação em ciclos futuros
 
-Em vez de encerrar a análise no dashboard, o projeto propõe próximos experimentos para evolução contínua da estratégia de conteúdo.
+### Gráficos de barras
+
+Os gráficos mostram como o engajamento médio varia de acordo com:
+- dia da semana
+- horário de publicação
+
+Como a análise utiliza médias, evita o viés causado pela concentração de publicações em determinados períodos e ajuda a identificar momentos com maior potencial de alcance orgânico.
+
+### Recomendações
+
+A seção de recomendações traduz os resultados em ações práticas. Em vez de apenas apresentar métricas, o dashboard sugere mudanças concretas na estratégia editorial, como:
+- diversificar formatos
+- aumentar a frequência de vídeos
+- priorizar determinados dias e horários de publicação
+
+### Hipóteses para validar
+
+Toda análise gera novas perguntas. Por isso, o dashboard termina propondo hipóteses que podem ser testadas em ciclos futuros de publicação. 
+
+As hipóteses funcionam como ponto de partida para experimentos simples, permitindo validar se mudanças na estratégia realmente aumentam o engajamento do perfil ao longo do tempo visando evolução contínua da estratégia de conteúdo.
 
 ## Principais Insights
 
