@@ -1,7 +1,9 @@
-# Pipeline de Dados da Meta para Análise
+# Pipeline de Analytics do Instagram: Da API da Meta a Insights de Negócios
 
-Projeto desenvolvido para a ONG **Espaço Logos de Cidadania Consciente**, uma organização que promove projetos educativos, culturais e esportivos para crianças e jovens.  
-Este repositório contém um ETL que coleta métricas do Instagram da ONG via **Instagram Graph API (Meta)**, salva os dados brutos no **Google Sheets** e alimenta dashboards no **Looker**, tudo automatizado com **GitHub Actions**.
+Projeto desenvolvido para a ONG **Espaço Logos de Cidadania Consciente**, organização que promove projetos educativos, culturais e esportivos para crianças e jovens.
+O objetivo deste projeto foi responder uma pergunta simples: **Quais conteúdos geram mais engajamento no Instagram da ONG e quando vale a pena publicá-los?**
+
+Para isso, foi desenvolvido um pipeline de dados que coleta métricas do Instagram via **Instagram Graph API (Meta)**, organiza os dados em uma camada analítica e alimenta dashboards no **Looker Studio**, permitindo que a gestora acompanhe o desempenho das publicações e tome decisões baseadas em dados.
 
 ---
 
@@ -11,70 +13,67 @@ O Espaço Logos de Cidadania Consciente atua na região da Tijuca (Rio de Janeir
 
 ---
 
-## Funcionamento do Projeto
+## Arquitetura do Projeto
 
 1. **Coleta de Dados**  
-   - Usa a **Instagram Graph API** para buscar todas as mídias do perfil da ONG.  
-   - Campos coletados: `id`, `caption`, `media_type`, `timestamp`, `permalink`, `like_count`, `comments_count`.
+   - Extração das publicações via Instagram Graph API.
+   - Coleta de curtidas, comentários, tipo de mídia, data de publicação e permalink.
 
-2. **Batch de Insights**  
-   - Em lotes (até 50 IDs por requisição) busca `saved` e `shares` via endpoint `/insights?metric=saved,shares` para reduzir número de requisições e tempo.
+2. **Enriquecimento**  
+   - Consulta em lote (batch) dos indicadores de salvamentos e compartilhamentos.
 
-3. **Armazenamento Raw**  
-   - Insere os dados brutos (raw) em uma aba chamada `raw` no Google Sheets (via API).
+3. **Camada Raw**  
+   - Armazenamento dos dados brutos em Google Sheets via API.
 
 4. **Automação**  
-   - GitHub Actions executa o script por agendamento (cron).
+   - Atualização automática semanal utilizando GitHub Actions.
 
-5. **Visualização**  
-   - Dados no Google Sheets são usados como fonte para dashboards no Looker.
+5. **Camada Analítica**  
+   - Organização dos dados para consumo pelo Looker Studio.
 
+5. **Visualização**
+   - Construção de dashboards orientados à tomada de decisão.
 ---
 
 ## Visualização de Dados com o Looker Studio 
 
-O dashboard é uma ferramenta prática para ajudar a gestora da ONG a visualizar os dados do Instagram sem complexidade técnica, identificar o que funciona melhor para a comunidade e tomar decisões simples para melhorar a presença digital e o engajamento orgânico do perfil. Foi desenvolvido pela ferramenta Looker Studio e tem duas páginas que mostram diferentes aspectos do desempenho dos posts no Instagram.
+O dashboard foi desenvolvido pensando em uma usuária não técnica. O objetivo era responder perguntas que ajudassem a ONG a melhorar sua estratégia de conteúdo.
 
 ![Página 1](dashboard/Espaço_Logos_page-0001.jpg)
 ![Página 1](dashboard/Espaço_Logos_page-0002.jpg)
 
-## Página 1 – O Que Mais Chama Atenção
+## Página 1 – O que engaja nosso público?
 
-Nesta página, temos os posts que mais tiveram reações do público, separados por quatro métricas importantes:
-- Posts mais curtidos
-- Posts mais comentados
-- Posts com mais salvamentos
-- Posts com mais compartilhamentos
+A primeira página identifica quais conteúdos geram maior engajamento. As análises respondem perguntas como:
+- Qual formato performa melhor?
+- O volume de publicações acompanha o desempenho?
+- Quais tipos de conteúdo recebem mais curtidas, comentários, salvamentos e compartilhamentos?
 
-Cada quadrante apresenta:
+Além dos indicadores, cada seção apresenta um insight interpretando os resultados.
 
-Uma tabela com os top posts para cada métrica, mostrando o tipo do post, o número de interações e o link direto para o Instagram.
+## Página 2 – Quando vale a pena publicar?
 
-Um pequeno insight em linguagem simples e direta, destacando o que foi percebido em cada grupo, como:
-   - Reels e carrosséis tendem a ter mais curtidas.
-   - Posts com perguntas na legenda geram mais comentários.
-   - Conteúdos inspiradores e sobre atividades com crianças são os mais salvos.
-   - Reels e carrosséis mostrando a missão da ONG são mais compartilhados.
+A segunda página transforma os resultados em recomendações práticas. Ela apresenta:
+- melhores dias para publicação
+- melhores horários
+- recomendações priorizadas
+- hipóteses para validação em ciclos futuros
 
-## Página 2 – Quando Alcançar Mais Pessoas
+Em vez de encerrar a análise no dashboard, o projeto propõe próximos experimentos para evolução contínua da estratégia de conteúdo.
 
-Esta página ajuda a entender melhores momentos e tipos de post para aumentar o alcance e o engajamento:
-   - Um gráfico de barras mostra quais dias da semana geram mais engajamento (curtidas + comentários). 
-   - Um gráfico de barras indica as faixas de horário com maior engajamento. 
-   - Gráfico mostrando o desempenho médio de curtidas, comentários, compartilhamentos e salvamentos para cada tipo de mídia (imagem, vídeo e carrossel). O insight:
-   - Quantidade de posts por tipo
+## Principais Insights
 
-## Insights Gerais
-
-+ Apostar em Reels e Carrosséis: esses formatos geram maior engajamento e são mais compartilhados, ajudando a ampliar o alcance da mensagem.
-+ Publicar nos horários de maior engajamento: dias úteis no fim da manhã e início da tarde mostram maior interação, otimiza o impacto das postagens.
-+ Conteúdos inspiradores e atividades com crianças são valorizados: aproveitar esses temas ajuda a aumentar o número de salvamentos e compartilhamentos, o que indica que são conteúdos que o público quer guardar e dividir.
++ Vídeos apresentam o maior engajamento médio, apesar de representarem uma pequena parcela das publicações.
++ Imagens concentram quase 80% do calendário editorial, mas possuem o menor engajamento médio.
++ Carrosséis apresentam maior média de salvamentos, indicando potencial para conteúdos educativos.
++ Terças, quartas e quintas concentram os maiores níveis médios de engajamento.
++ O período noturno apresentou melhor desempenho médio nas publicações analisadas.
 
 
 ---
 
 ## Ferramentas Utilizadas
 
-| Python | Google Sheets | Looker | GitHub Actions |
-| :----: | :-----------: | :----: | :------------: |
+| Python | Google Sheets | Looker Studio | GitHub Actions |
+| :----: | :-----------: | :-----------: | :------------: |
 | <a href="https://www.python.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="100"></a> | <a href="https://www.google.com/sheets/about/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" width="50"></a> | <a href="https://looker.com/" target="_blank"><img src="https://www.svgrepo.com/show/354012/looker-icon.svg" width="80"></a> | <a href="https://github.com/features/actions" target="_blank"><img src="https://icon.icepanel.io/Technology/svg/GitHub-Actions.svg" width="80"></a> |
